@@ -1,0 +1,21 @@
+<div class="col-6 col-md-4">
+  <ul id="<%= task_name%>-list" class="connectedSortable list-group mb-3 p-3 border" data-type="<%= task_name%>">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+      <span class="text-muted"><%= task_name.titlecase %> Tasks</span>
+    </h4>
+    <%- unless tasks.present? %>
+      <span class="emptyList">No tasks</span>
+    <%- end %>
+    <%- tasks.each do |task| %>
+      <li class="list-group-item d-flex justify-content-between lh-condensed" data-sequence="<%=task.sequence%>" data-id="<%=task.id%>" data-status="<%= task_name%>">
+        <div>
+          <h6 class="my-0"><%= task.title %></h6>
+          <small class="text-muted"><%= task.description %></small>
+        </div>
+        <span class="text-muted"><%= task.due_date %></span>
+        <%= link_to "Edit", edit_task_path(task) %>
+        <%= link_to "Delete", task_path(task), method:"delete" %>
+      </li>
+    <%- end %>
+  </ul>
+</div>
