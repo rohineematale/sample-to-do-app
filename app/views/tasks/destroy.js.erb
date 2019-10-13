@@ -1,0 +1,9 @@
+<%- if @task.errors.present? %>
+  alert("An error occurred while deleting task, please try again.");
+<%- else %>
+  var ele = $('li.list-group-item[data-id="<%=@task.id%>"]')
+  ele.remove();
+  if (ele.siblings("li").length == 0) {
+    $(this).find("h5").after("<span class='emptyList'>No tasks</span>")
+  }
+<%- end %>
