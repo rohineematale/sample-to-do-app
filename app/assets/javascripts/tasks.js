@@ -5,10 +5,19 @@
 $(document).ready(function(){
   $( "#due-list, #pending-list, #completed-list" ).sortable({
     connectWith: ".connectedSortable",
-    revert: true
+    revert: true,
+    cursor: "move"
   });
 
   $( "#due-list" ).sortable({
+    connectWith: "#completed-list"
+  });
+
+  $( "#pending-list" ).sortable({
+    connectWith: "#completed-list"
+  });
+
+  $( "#completed-list" ).sortable({
     connectWith: "#completed-list"
   });
 
@@ -28,7 +37,7 @@ $(document).ready(function(){
 
   $( "#due-list, #pending-list, #completed-list"  ).on( "sortremove", function( event, ui ) {
     if ($(this).children("li").length == 0) {
-      $(this).find("h5").after("<span class='emptyList'>No tasks</span>")
+      $(this).html("<span class='emptyList'>No tasks</span>")
     }
   })
 })
@@ -55,6 +64,6 @@ function ajax_response_handler(response, ele) {
     ele.attr("data-sequence", response.sequence);
     ele.attr("data-status", response.status);
   } else {
-    alert("An error occurred, please try again.");
+    alert("An error occurred.\n"+response.error);
   }
 }
