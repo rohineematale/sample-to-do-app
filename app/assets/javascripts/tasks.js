@@ -51,7 +51,7 @@ function send_update_tasks(ele, url, data) {
 function ajax_response_handler(response, ele) {
   if (response.success) {
     ele.parent().find("span.emptyList").remove();
-    ele.parent().find("small.due_date").html(response.due_date);
+    ele.find("small.due_date").html(response.due_date);
     ele.attr("data-sequence", response.sequence);
     ele.attr("data-status", response.status);
   } else {

@@ -13,6 +13,12 @@ class Task < ApplicationRecord
   end
 
   def update_seq_status(params)
+    set_sequence(params)
+    set_status(params)
+    self.save
+  end
+
+  def set_sequence(params)
     if (params["prev_sequence"] && params["next_sequence"])
       self.sequence = ((params["prev_sequence"].to_f + params["next_sequence"].to_f) / 2)
     elsif (params["prev_sequence"] && !params["next_sequence"])
@@ -20,12 +26,14 @@ class Task < ApplicationRecord
     elsif (!params["prev_sequence"] && params["next_sequence"])
       self.sequence = params["next_sequence"].to_f - 1
     end
+  end
+
+  def set_status(params)
     if params["status"] && params["status"] == "due"
       self.status = "pending" if self.status != "pending"
       self.due_date = Date.today
     elsif params["status"]
       self.status = params["status"]
     end
-    self.save
   end
 end
