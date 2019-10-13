@@ -45,53 +45,7 @@ $(document).ready(function(){
 
   $( "#due-list, #pending-list, #completed-list"  ).on( "sortremove", function( event, ui ) {
     if ($(this).children("li").length == 0) {
-      $(this).find("h4").after("<span class='emptyList'>No tasks</span>")
+      $(this).find("h5").after("<span class='emptyList'>No tasks</span>")
     }
   })
-  // $( "#completed-list" ).on( "sortupdate", function( event, ui ) {
-  //   console.log("completed-list");
-  //   var completed_list = {}
-  //   $("ul#completed-list").children().each(function( index, element ){
-  //     ele = $(element);
-  //     ele.attr("data-status", "completed" );
-  //     ele.attr("data-sequence", index);
-  //     completed_list[ele.data("id")] = {"sequence": index}
-  //   });
-  //   console.log(completed_list);
-  //   $.ajax({
-  //       dataType: "json",
-  //       url: "/tasks/update_tasks",
-  //       method: 'patch',
-  //       data: {
-  //           list: completed_list,
-  //           status: "completed"
-  //       },
-  //       error: function() {
-  //         alert("An error occurred, please try again.");
-  //       }
-  //   });
-  // });
-  // $( "#pending-list" ).on( "sortupdate", function( event, ui ) {
-  //   console.log("pending-list");
-  //   var pending_list = {}
-  //   $("ul#pending-list").children().each(function( index, element ){
-  //     ele = $(element);
-  //     ele.attr("data-status", "pending" );
-  //     ele.attr("data-sequence", index);
-  //     pending_list[ele.data("id")] = {"sequence": index}
-  //   });
-  //   console.log(pending_list);
-  //   $.ajax({
-  //       dataType: "json",
-  //       url: "/tasks/update_tasks",
-  //       method: 'patch',
-  //       data: {
-  //           list: pending_list,
-  //           status: "pending"
-  //       },
-  //       error: function() {
-  //         alert("An error occurred, please try again.");
-  //       }
-  //   });
-  // });
 })

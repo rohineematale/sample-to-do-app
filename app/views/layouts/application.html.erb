@@ -3,17 +3,13 @@
   <head>
     <title>DripCapitalToDoAssignment</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <%= render "/layouts/nav_bar"%>
     <div class="container">
-      <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-      <%- end -%> 
+      <%= render "/layouts/notice"%>
       <%= yield %>
     </div>
   </body>

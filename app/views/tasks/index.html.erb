@@ -1,4 +1,6 @@
-<%= link_to "Add Task", new_task_path, class: "btn btn-warning" %>
+<div class="row mb-2 p-2">
+  <%= link_to "Add Task", new_task_path, class: "btn btn-warning" %>
+</div>
 <div class="row">
   <%= render partial: 'list_task', locals: {tasks: @due_tasks, task_name: 'due'}%>
   <%= render partial: 'list_task', locals: {tasks: @pending_tasks, task_name: 'pending'}%>

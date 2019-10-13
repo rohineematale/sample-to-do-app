@@ -15,18 +15,18 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(tasks_params)
     if @task.save
+      flash[:notice] = "Task successfully created"
       redirect_to tasks_path
     else
       render :new
     end
   end
 
-  def show; end
-
   def edit; end
 
   def update
     if @task.update_attributes(tasks_params)
+      flash[:notice] = "Task successfully updated"
       redirect_to tasks_path
     else
       render :edit
@@ -35,6 +35,7 @@ class TasksController < ApplicationController
 
   def update_task
     if @task.update_seq_status(params)
+      flash[:notice] = "Task successfully updated"
       render json: { success: true, sequence: @task.sequence, status: @task.status }
     else
       render json: { success: false, error: @task.errors.full_messages }
@@ -43,6 +44,7 @@ class TasksController < ApplicationController
 
   def destroy
     if @task.destroy
+      flash[:notice] = "Task deleted successfully"
       redirect_to tasks_path
     else
       redirect_to tasks_path
