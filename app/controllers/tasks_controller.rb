@@ -2,10 +2,7 @@ class TasksController < ApplicationController
   before_action :get_task, only: [:show, :edit, :update, :update_task, :destroy]
 
   def index
-    all_tasks = current_user.tasks.order("sequence ASC")
-    @pending_tasks = all_tasks.select{|task| (task.status == 'pending') && (task.due_date != Date.today)}
-    @due_tasks = all_tasks.select{|task| (task.status == 'pending') && (task.due_date == Date.today)}
-    @closed_tasks = all_tasks.select{|task| task.status == 'completed'}
+    @all_tasks = current_user.tasks.order("sequence ASC")
     respond_to do |format|
       format.html
     end
