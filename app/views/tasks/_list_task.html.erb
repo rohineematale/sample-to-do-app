@@ -14,7 +14,7 @@
               <h6 class="my-0"><%= task.title %></h6>
             </div>
             <div class="col-3">
-              <small class="text-muted"><%= formatted_date(task.due_date) %></small>
+              <small class="text-muted due_date"><%= task.formatted_date %></small>
             </div>
             <div class="col-3">
               <%= link_to edit_task_path(task) do%>

@@ -8,8 +8,11 @@ class Task < ApplicationRecord
     self.sequence = last_sequence ? last_sequence+1 : 1
   end
 
+  def formatted_date
+    self.due_date ? self.due_date.strftime("%Y/%m/%d") : "--/--/--"
+  end
+
   def update_seq_status(params)
-    # byebug
     if (params["prev_sequence"] && params["next_sequence"])
       self.sequence = ((params["prev_sequence"].to_f + params["next_sequence"].to_f) / 2)
     elsif (params["prev_sequence"] && !params["next_sequence"])

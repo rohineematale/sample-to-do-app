@@ -22,25 +22,8 @@ $(document).ready(function(){
     }
     data['prev_sequence'] = ele.prev().data("sequence")
     data['next_sequence'] = ele.next().data("sequence")
-    id = ele.data("id")
-    $.ajax({
-        dataType: "json",
-        url: "/tasks/"+id+"/update_task",
-        method: 'patch',
-        data: data,
-        success: function(response) {
-          if (response.success) {
-            ele.parent().find("span.emptyList").remove();
-            ele.attr("data-sequence", response.sequence);
-            ele.attr("data-status", response.status);
-          } else {
-            alert("An error occurred, please try again.");
-          }
-        },
-        error: function() {
-          alert("An error occurred, please try again.");
-        }
-    });
+    url = "/tasks/"+ele.data("id")+"/update_task"
+    send_update_tasks(ele, url, data)
   });
 
   $( "#due-list, #pending-list, #completed-list"  ).on( "sortremove", function( event, ui ) {
@@ -49,3 +32,29 @@ $(document).ready(function(){
     }
   })
 })
+
+function send_update_tasks(ele, url, data) {
+  $.ajax({
+    dataType: "json",
+    url: url,
+    method: 'patch',
+    data: data,
+    success: function(response) {
+      ajax_response_handler(response, ele)
+    },
+    error: function() {
+      alert("An error occurred, please try again.");
+    }
+  });
+}
+
+function ajax_response_handler(response, ele) {
+  if (response.success) {
+    ele.parent().find("span.emptyList").remove();
+    ele.parent().find("small.due_date").html(response.due_date);
+    ele.attr("data-sequence", response.sequence);
+    ele.attr("data-status", response.status);
+  } else {
+    alert("An error occurred, please try again.");
+  }
+}

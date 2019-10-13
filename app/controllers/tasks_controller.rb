@@ -35,8 +35,7 @@ class TasksController < ApplicationController
 
   def update_task
     if @task.update_seq_status(params)
-      flash[:notice] = "Task successfully updated"
-      render json: { success: true, sequence: @task.sequence, status: @task.status }
+      render json: { success: true, sequence: @task.sequence, status: @task.status, due_date: @task.formatted_date }
     else
       render json: { success: false, error: @task.errors.full_messages }
     end
